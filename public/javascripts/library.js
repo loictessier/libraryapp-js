@@ -21,6 +21,13 @@ var Library = function (_React$Component) {
   }
 
   _createClass(Library, [{
+    key: "change",
+    value: function change(e) {
+      this.setState(function (old) {
+        return { "type": e.target.value };
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -54,8 +61,32 @@ var Library = function (_React$Component) {
 }(React.Component);
 
 function ListPage(props) {
+  var dest = [];
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
 
-  console.log("On affiche la liste des bouquins...");
+  try {
+    for (var _iterator = documentsList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var d = _step.value;
+
+      dest.push(React.createElement(DocumentItem, { name: d.name, author: d.author, year: d.year, type: d.type }));
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
   return React.createElement(
     "div",
     null,
@@ -68,28 +99,37 @@ function ListPage(props) {
       "table",
       null,
       React.createElement(
-        "tbody",
+        "thead",
         null,
         React.createElement(
-          "th",
+          "tr",
           null,
-          "Nom"
-        ),
-        React.createElement(
-          "th",
-          null,
-          "Auteur"
-        ),
-        React.createElement(
-          "th",
-          null,
-          "Date de parution"
-        ),
-        React.createElement(
-          "th",
-          null,
-          "Type de document"
+          React.createElement(
+            "th",
+            null,
+            "Nom"
+          ),
+          React.createElement(
+            "th",
+            null,
+            "Auteur"
+          ),
+          React.createElement(
+            "th",
+            null,
+            "Date de parution"
+          ),
+          React.createElement(
+            "th",
+            null,
+            "Type de document"
+          )
         )
+      ),
+      React.createElement(
+        "tbody",
+        null,
+        dest
       )
     )
   );
@@ -107,33 +147,91 @@ function FormPage(props) {
     ),
     React.createElement(
       "form",
-      { "class": "", action: "", method: "post" },
+      { className: "", action: "", method: "post" },
       React.createElement("input", { type: "text", name: "name", placeholder: "Nom du Document" }),
       React.createElement("input", { type: "text", name: "author", placeholder: "Nom de l'auteur" }),
       React.createElement("input", { type: "number", min: "1500", max: "2019", name: "year", placeholder: "Ann\xE9e de parution" }),
-      React.createElement("input", { type: "text", name: "type", placeholder: "Type de document" }),
-      React.createElement("input", { type: "button", value: "Enregistrer" })
+      React.createElement(
+        "select",
+        { type: "text", name: "type", placeholder: "Type de document" },
+        React.createElement(
+          "option",
+          null,
+          "Roman"
+        ),
+        React.createElement(
+          "option",
+          null,
+          "Manga"
+        ),
+        React.createElement(
+          "option",
+          null,
+          "Nouvelle"
+        ),
+        React.createElement(
+          "option",
+          null,
+          "Document"
+        )
+      ),
+      React.createElement("input", { type: "submit", value: "Enregistrer" })
     )
   );
 }
 
 function Menu(props) {
   return React.createElement(
-    "p",
+    "ul",
     null,
     React.createElement(
-      "a",
-      { href: "#", onClick: function onClick() {
-          return props.click("list");
-        } },
-      "list"
+      "li",
+      null,
+      React.createElement(
+        "a",
+        { href: "#", onClick: function onClick() {
+            return props.click("list");
+          } },
+        "Les Ouvrages"
+      )
     ),
     React.createElement(
-      "a",
-      { href: "#", onClick: function onClick() {
-          return props.click("formulaire");
-        } },
-      "formulaire"
+      "li",
+      null,
+      React.createElement(
+        "a",
+        { href: "#", onClick: function onClick() {
+            return props.click("formulaire");
+          } },
+        "Nouvel Ouvrage"
+      )
+    )
+  );
+}
+
+function DocumentItem(props) {
+  return React.createElement(
+    "tr",
+    null,
+    React.createElement(
+      "td",
+      null,
+      props.name
+    ),
+    React.createElement(
+      "td",
+      null,
+      props.author
+    ),
+    React.createElement(
+      "td",
+      null,
+      props.year
+    ),
+    React.createElement(
+      "td",
+      null,
+      props.type
     )
   );
 }
