@@ -1,8 +1,10 @@
 const sqlite3 = require("sqlite3");
 
-module.exports.init = function(){
+module.exports.init = function(query){
     let db = new sqlite3.Database("models/library.db");
-    db.run("CREATE TABLE IF NOT EXISTS Documents(id INTEGER AUTOINCREMENT PRIMARY KEY, name TEXT, author TEXT, year TEXT, type TEXT)");
+    db.run("CREATE TABLE IF NOT EXISTS Documents(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, author TEXT, year TEXT, type TEXT)", function(){
+        query();
+    });
     db.close();
 }
 
