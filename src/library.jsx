@@ -5,10 +5,6 @@ class Library extends React.Component{
     this.state={page:"list"}
   }
 
-  change(e){
-    this.setState(old => ({"type": e.target.value}))
-  }
-
   render(){
     let page;
     switch(this.state.page){
@@ -32,7 +28,7 @@ class Library extends React.Component{
 function ListPage(props){
   let dest=[]
   for (var d of documentsList) {
-    dest.push(<DocumentItem name={d.name} author={d.author} year={d.year} type={d.type}/>)
+    dest.push(<DocumentItem name={d.name} author={d.author} year={d.year} type={d.type} key={d.id}/>)
   }
   return (
     <div>
@@ -46,9 +42,9 @@ function ListPage(props){
           <th>Type de document</th>
         </tr>
       </thead>
-      <tbody>
-      {dest}
-      </tbody>
+        <tbody>
+          {dest}
+        </tbody>
       </table>
     </div>
   )

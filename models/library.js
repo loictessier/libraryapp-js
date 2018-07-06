@@ -18,12 +18,11 @@ module.exports.insert = function(name, author, year, type){
 
 module.exports.selectAll = function(display){
     let db = new sqlite3.Database("models/library.db");
-    let sql = "SELECT name, author, year, type FROM Documents ORDER BY author, year";
+    let sql = "SELECT id, name, author, year, type FROM Documents ORDER BY author, year";
     db.all(sql, (err, rows) => {
       if(err) {
           throw err;
       }
-      console.log(JSON.stringify(rows))
       display(JSON.stringify(rows));
     });
     db.close();

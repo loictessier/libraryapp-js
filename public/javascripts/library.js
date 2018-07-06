@@ -21,13 +21,6 @@ var Library = function (_React$Component) {
   }
 
   _createClass(Library, [{
-    key: "change",
-    value: function change(e) {
-      this.setState(function (old) {
-        return { "type": e.target.value };
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -70,7 +63,7 @@ function ListPage(props) {
     for (var _iterator = documentsList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var d = _step.value;
 
-      dest.push(React.createElement(DocumentItem, { name: d.name, author: d.author, year: d.year, type: d.type }));
+      dest.push(React.createElement(DocumentItem, { name: d.name, author: d.author, year: d.year, type: d.type, key: d.id }));
     }
   } catch (err) {
     _didIteratorError = true;
