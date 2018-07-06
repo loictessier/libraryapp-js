@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   require("../models/library.js").init();
   let documentsList = require("../models/library.js").selectAll();
-  res.render('index', { title: 'LibrayApp', documentsList: documentsList });
+  res.render('library', { title: 'LibrayApp', documentsList: documentsList });
 });
 
 router.post('/', function(req, res, next){
