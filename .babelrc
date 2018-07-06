@@ -1,0 +1,8 @@
+
+{
+  "presets":[
+    ["react"],
+    ["env", {
+      "targets":{"firefox": 5.4}, "debug": true
+    }]
+]}
